@@ -1,121 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Importamos los componentes que ya creaste
+import Layout from './components/ui/Layout.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
+// =====================================================================
+// PLACEHOLDERS (Espacios reservados para el resto del equipo)
+// =====================================================================
+
+const MapaView = () => (
+  <div className="flex h-full min-h-[600px] items-center justify-center border-2 border-dashed border-gray-700 rounded-xl bg-gray-800/50">
+    <div className="text-center">
+      <h2 className="text-3xl font-bold text-blue-400 mb-2">🗺️ Área del Dev 3</h2>
+      <p className="text-gray-400">Aquí irá el SmartMap con Leaflet y OpenStreetMap.</p>
+    </div>
+  </div>
+);
+
+const VisionView = () => (
+  <div className="flex h-full min-h-[600px] items-center justify-center border-2 border-dashed border-gray-700 rounded-xl bg-gray-800/50">
+    <div className="text-center">
+      <h2 className="text-3xl font-bold text-red-400 mb-2">🧠 Área del Dev 2</h2>
+      <p className="text-gray-400">Aquí irá la cámara con TensorFlow.js detectando basura.</p>
+    </div>
+  </div>
+);
+
+const ChatView = () => (
+  <div className="flex h-full min-h-[600px] items-center justify-center border-2 border-dashed border-gray-700 rounded-xl bg-gray-800/50">
+    <div className="text-center">
+      <h2 className="text-3xl font-bold text-purple-400 mb-2">🤖 Área del Dev 4</h2>
+      <p className="text-gray-400">Aquí irá el asistente conectado a Gemini.</p>
+    </div>
+  </div>
+);
+
+// =====================================================================
+// ENRUTADOR PRINCIPAL
+// =====================================================================
+
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        {/* El Layout envuelve todas estas rutas, por eso el menú lateral nunca desaparece */}
+        <Route path="/" element={<Layout />}>
+          {/* 'index' significa que el Dashboard es la ruta por defecto ("/") */}
+          <Route index element={<Dashboard />} />
+          <Route path="mapa" element={<MapaView />} />
+          <Route path="vision" element={<VisionView />} />
+          <Route path="chat" element={<ChatView />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App
