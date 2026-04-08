@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/ui/Layout.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import { Chatbot } from './components/chat/Chatbot.jsx'; 
+import VisionDetector from './components/vision/VisionDetector';
 
 // =====================================================================
 // PLACEHOLDERS (Espacios reservados para el resto del equipo)
@@ -20,11 +21,8 @@ const MapaView = () => (
 );
 
 const VisionView = () => (
-  <div className="flex h-full min-h-[600px] items-center justify-center border-2 border-dashed border-gray-700 rounded-xl bg-gray-800/50">
-    <div className="text-center">
-      <h2 className="text-3xl font-bold text-red-400 mb-2">🧠 Área del Dev 2</h2>
-      <p className="text-gray-400">Aquí irá la cámara con TensorFlow.js detectando basura.</p>
-    </div>
+  <div className="h-full flex items-start justify-center">
+    <VisionDetector />
   </div>
 );
 
