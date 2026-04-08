@@ -1,34 +1,45 @@
 // src/components/maps/RouteLayer.jsx
-import { Polyline } from 'react-leaflet';
+import { Polyline, Tooltip } from 'react-leaflet';
 
-export default function RouteLayer() {
-  // Ejemplo: Ruta por la Av. Daniel León Borja (Riobamba)
-  const rutaEficiente = [
-    [-1.6730, -78.6530],
-    [-1.6700, -78.6500],
-    [-1.6670, -78.6470]
+export default function RouteLayer({ activeAlerts = [] }) {
+  // Si no hay alertas, mostramos una ruta de patrullaje estándar
+  const rutaBase = [
+    [-1.6730, -78.6530], // Parque Infantil
+    [-1.6700, -78.6500], // Av. Daniel L. Borja
+    [-1.6670, -78.6470]  // Estación
   ];
 
-  const rutaIneficiente = [
-    [-1.6730, -78.6530],
-    [-1.6750, -78.6510], // Desvío innecesario
-    [-1.6700, -78.6500],
-    [-1.6670, -78.6470]
-  ];
+  // LOGICA INTELIGENTE: Si hay alertas de Supabase, las unimos para crear la ruta
+  // En un sistema real, aquí enviaríamos estos puntos a OpenRouteService para obtener el camino por calles
+  const puntosDinamicos = activeAlerts.length > 0 
+    ? activeAlerts.map(alerta => [alerta.lat, alerta.lng])
+    : rutaBase;
 
   return (
     <>
-      {/* Ruta Optimizada */}
+      {/* Ruta Inteligente (Verde Esmeralda) */}
       <Polyline 
-        positions={rutaEficiente} 
-        pathOptions={{ color: '#10b981', weight: 6, opacity: 0.8 }} 
-      />
-      
-      {/* Ruta Ineficiente (Punteada) */}
-      <Polyline 
-        positions={rutaIneficiente} 
-        pathOptions={{ color: '#ef4444', weight: 4, dashArray: '10, 10', opacity: 0.6 }} 
-      />
+        positions={puntosDinamicos} 
+        pathOptions={{ 
+          color: '#10b981', 
+          weight: 6, 
+          opacity: 0.9,
+          lineJoin: 'round',
+          dashArray: activeAlerts.length > 0 ? '1, 0' : '10, 10' // Sólida si hay alertas, punteada si es patrulla
+        }} 
+      >
+        <Tooltip sticky>Ruta Optimizada por EcoIA</Tooltip>
+      </Polyline>
+
+      {/* Marcadores visuales de 'Nodos' en la ruta */}
+      {puntosDinamicos.map((pos, idx) => (
+        <circle 
+          key={idx} 
+          center={pos} 
+          r={5} 
+          pathOptions={{ color: '#059669', fillOpacity: 1 }} 
+        />
+      ))}
     </>
   );
 }
