@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import WebcamView from '../components/camera/WebcamView';
-import useObjectDetector from '../components/vision/ObjectDetector';
-import DetectionCanvas from '../components/camera/DetectionCanvas';   
+import WebcamView from '../components/Camera/WebcamView';
+import useObjectDetector from '../components/Vision/ObjectDetector';
+import DetectionCanvas from '../components/Camera/DetectionCanvas';   
 const VisionPage = () => {
     const [imageSrc, setImageSrc] = useState(null);
     const predictions = useObjectDetector(imageSrc);

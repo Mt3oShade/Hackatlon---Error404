@@ -10,16 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.102.1",
     "@tensorflow-models/coco-ssd": "^2.2.3",
     "@tensorflow/tfjs": "^4.22.0",
     "lucide-react": "^1.7.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.14.0",
-<<<<<<< HEAD
     "react-webcam": "^7.2.0",
-=======
->>>>>>> 0996a3bdf504f4db25fea5ec10a21ae0b353e3da
     "recharts": "^3.8.1"
   },
   "devDependencies": {
