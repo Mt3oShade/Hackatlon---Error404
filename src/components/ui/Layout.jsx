@@ -10,7 +10,6 @@ export default function Layout() {
     { path: '/', name: 'Dashboard', icon: Home },
     { path: '/mapa', name: 'Mapa Inteligente', icon: MapIcon },
     { path: '/vision', name: 'Detector IA', icon: Camera },
-    { path: '/chat', name: 'Asistente Eco', icon: MessageSquare },
   ];
 
   return (
