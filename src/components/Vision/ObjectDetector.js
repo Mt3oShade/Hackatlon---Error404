@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import '@tensorflow/tfjs';
 
-const ObjectDetector = ({ imageSrc }) => {
+const useObjectDetector = (imageSrc) => {
     const [predictions, setPredictions] = useState([]);
 
     useEffect(() => {
@@ -21,4 +21,4 @@ const ObjectDetector = ({ imageSrc }) => {
     return predictions;
 };
 
-export default ObjectDetector;
+export default useObjectDetector;
