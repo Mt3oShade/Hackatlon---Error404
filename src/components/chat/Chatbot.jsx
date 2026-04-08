@@ -1,47 +1,23 @@
-// src/components/chat/Chatbot.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-
-// Respuestas simuladas (luego conectarás Gemini)
+import geminiService from '../../services/geminiService'; 
 const getBotResponse = async (text) => {
-  const lowerText = text.toLowerCase();
-  
-  await new Promise(resolve => setTimeout(resolve, 500)); // Simula delay
-  
-  if (lowerText.includes('saboya')) {
-    return "📍 Barrio Saboya: LUNES, MIÉRCOLES y VIERNES de 07:00 a 12:00. ♻️";
+  try {
+    console.log("📨 Enviando a Groq:", text);
+    const response = await geminiService.sendMessage(text);
+    console.log("📨 Respuesta de Groq:", response);
+    
+    if (response.success) {
+      return response.message;
+    } else {
+      return response.message; // El mensaje de error ya viene formateado
+    }
+  } catch (error) {
+    console.error("Error al llamar a Groq:", error);
+    return "🌱 Lo siento, tengo problemas de conexión. Por favor, intenta de nuevo.";
   }
-  if (lowerText.includes('veloz')) {
-    return "📍 Barrio Veloz: MARTES, JUEVES y SÁBADO de 08:00 a 13:00. ♻️";
-  }
-  if (lowerText.includes('terminal')) {
-    return "📍 Terminal: MARTES, JUEVES y SÁBADO de 09:00 a 14:00. ♻️";
-  }
-  if (lowerText.includes('pilas')) {
-    return "⚠️ ¡Cuidado! Las pilas son PELIGROSAS. Llévalas al Punto Verde del Parque Maldonado (L-V 8am-5pm).";
-  }
-  if (lowerText.includes('aceite')) {
-    return "🫒 Aceite usado: Guarda en botella cerrada. Recolección los jueves en Centro de Acopio Móvil.";
-  }
-  if (lowerText.includes('plástico') || lowerText.includes('plastico')) {
-    return "🥤 Plásticos van en contenedor AMARILLO. Recuerda enjuagar y aplastar.";
-  }
-  if (lowerText.includes('orgánico') || lowerText.includes('organico')) {
-    return "🍌 Residuos orgánicos van en contenedor VERDE. ¡Puedes hacer compost!";
-  }
-  if (lowerText.includes('papel') || lowerText.includes('cartón')) {
-    return "📦 Papel y cartón van en contenedor AZUL. Dobla las cajas para ahorrar espacio.";
-  }
-  if (lowerText.includes('vender') || lowerText.includes('chatarra') || lowerText.includes('metal')) {
-    return "🚛 ¡Excelente! Para vender o donar chatarra, pronto implementaremos el formulario. Por ahora, contacta al 099 123 4567.";
-  }
-  if (lowerText.includes('hola') || lowerText.includes('buenas')) {
-    return "¡Hola! Soy EcoRiobamba GPT ♻️ Pregúntame sobre horarios (Saboya, Veloz, Terminal), cómo reciclar (pilas, plástico, orgánico) o venta de chatarra. ¿En qué te ayudo?";
-  }
-  
-  return "🌱 Pregúntame sobre:\n• Horarios: '¿Cuándo pasa el camión en Saboya?'\n• Residuos: '¿Qué hago con las pilas?'\n• Reciclaje: '¿Cómo reciclo plástico?'\n• Chatarra: 'Quiero vender chatarra'";
 };
 
 const Chatbot = () => {
