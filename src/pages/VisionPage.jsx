@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
-import WebcamView from '../components/Camera/WebcamView';
-import ObjectDetector from '../components/Vision/ObjectDetector';
-import DetectionCanvas from '../components/Camera/DetectionCanvas';
+import React, { useState, useEffect } from 'react';
+import WebcamView from '../components/camera/WebcamView';
+import ObjectDetector from '../components/vision/ObjectDetector';
+import DetectionCanvas from '../components/camera/DetectionCanvas';
 
 const VisionPage = () => {
     const [imageSrc, setImageSrc] = useState(null);
     const [predictions, setPredictions] = useState([]);
 
+    // Captura de la imagen desde la webcam
     const handleCapture = (imageSrc) => {
         setImageSrc(imageSrc);
     };
 
-    const predictionsFromModel = ObjectDetector({ imageSrc });
-    setPredictions(predictionsFromModel);
+    // Usamos useEffect para ejecutar la detección cuando la imagen cambia
+    useEffect(() => {
+        const detectObjects = async () => {
+            if (imageSrc) {
+                const predictionsFromModel = await ObjectDetector({ imageSrc });
+                setPredictions(predictionsFromModel);
+            }
+        };
+        detectObjects();
+    }, [imageSrc]); // Solo se ejecuta cuando imageSrc cambia
 
     return (
         <div>

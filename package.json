@@ -16,11 +16,15 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.14.0",
+<<<<<<< HEAD
     "react-webcam": "^7.2.0",
+=======
+>>>>>>> 0996a3bdf504f4db25fea5ec10a21ae0b353e3da
     "recharts": "^3.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
