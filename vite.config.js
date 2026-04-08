@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite'  // Asegúrate de importar defineConfig
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
@@ -9,6 +9,8 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-      allowedHosts: 'all'
+    allowedHosts: [
+      'nonrecuperative-verla-hierarchically.ngrok-free.dev', // Usa tu URL de ngrok aquí
+    ],
   },
 })
