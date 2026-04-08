@@ -1,4 +1,6 @@
+// src/pages/Dashboard.jsx
 import KpiCard from '../components/ui/KpiCard';
+import SmartMap from '../components/maps/SmartMap'; // <-- ¡Inyección del componente de tu compañero!
 
 export default function Dashboard() {
   return (
@@ -18,7 +20,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Grid de Métricas usando nuestro Componente Reutilizable */}
+      {/* Grid de Métricas */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <KpiCard 
           title="Ecotachos Críticos" value="24" subtitle="+5 última hora"
@@ -42,19 +44,38 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* Gráficos y Actividad (Espacios reservados para el resto del equipo) */}
+      {/* Sección del Mapa (NUEVO) */}
+      <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h3 className="font-bold text-lg text-slate-900 font-headline">Monitor de Ecotachos (Riobamba)</h3>
+            <p className="text-slate-500 text-sm">Mapa inteligente y trazado de rutas en tiempo real.</p>
+          </div>
+          <span className="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            En vivo
+          </span>
+        </div>
+        
+        {/* CONTENEDOR DEL MAPA: Aquí está el truco del alto definido (h-[400px] o h-[500px]) */}
+        <div className="w-full h-[450px] rounded-lg overflow-hidden border border-slate-200 bg-slate-50 relative z-0">
+          <SmartMap /> 
+        </div>
+      </div>
+
+      {/* Gráficos y Actividad Inferior */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* Gráfico */}
+        {/* Gráfico de la IA (Pendiente) */}
         <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-sm border border-slate-100">
           <h3 className="font-bold text-lg text-slate-900 mb-2 font-headline">Eficiencia de Llenado</h3>
           <p className="text-slate-500 text-sm mb-6">Real vs Predicho por EcoIA</p>
           <div className="h-64 bg-slate-50 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center text-slate-400">
-            [Aquí el Dev 2 integrará los gráficos de Recharts]
+            [Aquí el Ing. de IA integrará los gráficos de Recharts]
           </div>
         </div>
 
-        {/* Lista de Actividad */}
+        {/* Lista de Actividad Reciente */}
         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100">
           <h3 className="font-bold text-lg text-slate-900 mb-6 font-headline">Actividad Reciente</h3>
           <div className="space-y-4">
@@ -67,7 +88,6 @@ export default function Dashboard() {
                 <p className="text-xs text-slate-500">Llenado 92% • Pendiente</p>
               </div>
             </div>
-            {/* Puedes agregar más items aquí */}
           </div>
         </div>
 
